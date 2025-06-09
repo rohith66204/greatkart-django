@@ -13,6 +13,7 @@ class MyAccountManager(BaseUserManager):
 
         user= self.model(
             email=self.normalize_email(email),
+            username = username,
             first_name=first_name,
             last_name=last_name,
         )
@@ -20,7 +21,7 @@ class MyAccountManager(BaseUserManager):
         user.set_password(password)
         user.save(using=self._db)
         return user
-        
+
     def create_superuser(self, first_name, last_name, email, username, password):
             user=self.create_user(
                 email=self.normalize_email(email),
