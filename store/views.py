@@ -9,7 +9,7 @@ from django.db.models import Q
 from .forms import ReviewForm
 from django.contrib import messages
 from orders.models import OrderProduct
-from .models import ReviewRating
+from .models import ReviewRating,ProductGallery
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import ReviewRating
 from django.urls import reverse
@@ -62,12 +62,13 @@ def product_detail(request, category_slug, product_slug):
     reviews = ReviewRating.objects.filter(product_id=single_product.id, status=True)
 
     # Get the product gallery
-
+    product_gallery = ProductGallery.objects.filter(product_id=single_product.id)
     context = {
         'single_product' : single_product,
         'in_cart': in_cart,
         'orderproduct': orderproduct,
         'reviews': reviews,
+        'product_gallery':product_gallery,
     }
 
     return render(request,'store/product_detail.html', context)
