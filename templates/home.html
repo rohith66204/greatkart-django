@@ -1,18 +1,241 @@
-
 {% extends 'base.html' %}
 
 {% load static %}
 
-
 {% block content %}
 
+<style>
+    /* Carousel Styles */
+    .banner-carousel-container {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .banner-carousel-slides {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        height: 400px; /* Adjust height as needed */
+    }
+
+    .banner-slide {
+        min-width: 100%;
+        position: relative;
+    }
+
+    .banner-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .banner-slide-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 25px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+    }
+
+    .banner-slide-content h2 {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        font-weight: 600;
+    }
+
+    .banner-slide-content p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        opacity: 0.9;
+    }
+
+    .banner-carousel-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        z-index: 10;
+    }
+
+    .banner-carousel-btn {
+        background: rgba(255, 255, 255, 0.8);
+        border: none;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        margin: 0 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .banner-carousel-btn:hover {
+        background: white;
+        transform: scale(1.1);
+    }
+
+    .banner-carousel-btn i {
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .banner-carousel-dots {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+        z-index: 10;
+    }
+
+    .banner-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .banner-dot.active {
+        background: white;
+        transform: scale(1.2);
+    }
+
+    .banner-dot:hover {
+        background: white;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 992px) {
+        .banner-carousel-slides {
+            height: 350px;
+        }
+
+        .banner-slide-content h2 {
+            font-size: 1.6rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .banner-carousel-slides {
+            height: 300px;
+        }
+
+        .banner-slide-content {
+            padding: 20px;
+        }
+
+        .banner-slide-content h2 {
+            font-size: 1.4rem;
+        }
+
+        .banner-slide-content p {
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .banner-carousel-slides {
+            height: 250px;
+        }
+
+        .banner-carousel-btn {
+            width: 35px;
+            height: 35px;
+            margin: 0 10px;
+        }
+
+        .banner-slide-content h2 {
+            font-size: 1.2rem;
+        }
+    }
+</style>
 
 <!-- ========================= SECTION MAIN ========================= -->
 <section class="section-intro padding-y-sm">
 <div class="container">
 
 <div class="intro-banner-wrap">
-	<img src="{% static 'images/banners/cover.jpg' %}" class="img-fluid rounded">
+    <div class="banner-carousel-container">
+        <div class="banner-carousel-slides">
+            <!-- Slide 1 -->
+            <div class="banner-slide">
+                <img src="{% static 'images/banners/300466.jpg' %}" alt="Electronics Sale">
+                <div class="banner-slide-content">
+
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="banner-slide">
+                <img src="{% static 'images/banners/pic3.jpg' %}" alt="Fashion Collection">
+                <div class="banner-slide-content">
+
+                </div>
+            </div>
+
+
+						<div class="banner-slide">
+                <img src="{% static 'images/banners/cover.jpg' %}" alt="Fashion Collection">
+                <div class="banner-slide-content">
+
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+						<div class="banner-slide">
+	    				<img src="{% static 'images/banners/photo.jpeg' %}" alt="Home Appliances"
+	         		style="width: 100%; height: 99%; object-fit: cover; object-position: center 80%;">
+
+				 		</div>
+
+
+            <!-- Slide 4 -->
+						<div class="banner-slide">
+						    <img src="{% static 'images/banners/3003.jpg' %}" alt="Home Appliances"
+						         style="width: 100%; height: 100%; object-fit: cover; object-position: center top;">
+						    <div class="banner-slide-content">
+						        <!-- Optional content here -->
+						    </div>
+						</div>
+
+						<!-- slide 5 -->
+						<div class="banner-slide">
+                <img src="{% static 'images/banners/173879.jpg' %}" alt="Beauty Products">
+                <div class="banner-slide-content">
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="banner-carousel-controls">
+            <button class="banner-carousel-btn prev-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="banner-carousel-btn next-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Dots Navigation -->
+        <div class="banner-carousel-dots">
+            <!-- Dots will be added dynamically -->
+        </div>
+    </div>
 </div>
 
 </div> <!-- container //  -->
@@ -24,43 +247,127 @@
 <div class="container">
 
 <header class="section-heading">
-	<a href="{% url 'store'%}" class="btn btn-outline-primary float-right">See all</a>
-	<h3 class="section-title">Popular products</h3>
+    <a href="{% url 'store'%}" class="btn btn-outline-primary float-right">See all</a>
+    <h3 class="section-title">Popular products</h3>
 </header><!-- sect-heading -->
 
 
 <div class="row">
-	{% for product in products %}
-	<div class="col-md-3">
-		<div class="card card-product-grid">
-			<a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
-			<figcaption class="info-wrap">
-				<a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
-				<div class="price mt-1">$ {{ product.price }}</div>
-				<!-- price-wrap.// -->
-				<div class="rating-star">
-					<span>
-						<i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
-						<i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
-
-				</div>
-			</figcaption>
-		</div>
-	</div> <!-- col.// -->
-	{% endfor %}
+    {% for product in products %}
+    <div class="col-md-3">
+        <div class="card card-product-grid">
+            <a href="{{ product.get_url }}" class="img-wrap"> <img src="{{ product.images.url }}"> </a>
+            <figcaption class="info-wrap">
+                <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                <div class="price mt-1">$ {{ product.price }}</div>
+                <!-- price-wrap.// -->
+                <div class="rating-star">
+                    <span>
+                        <i class="fa fa-star{% if product.averageReview < 0.5 %}-o{% elif product.averageReview >= 0.5 and product.averageReview < 1 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if product.averageReview < 1.5 %}-o{% elif product.averageReview >= 1.5 and product.averageReview < 2 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if product.averageReview < 2.5 %}-o{% elif product.averageReview >= 2.5 and product.averageReview < 3 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if product.averageReview < 3.5 %}-o{% elif product.averageReview >= 3.5 and product.averageReview < 4 %}-half-o {% endif %}" aria-hidden="true"></i>
+                        <i class="fa fa-star{% if product.averageReview < 4.5 %}-o{% elif product.averageReview >= 4.5 and product.averageReview < 5 %}-half-o {% endif %}" aria-hidden="true"></i>
+                </div>
+            </figcaption>
+        </div>
+    </div> <!-- col.// -->
+    {% endfor %}
 </div> <!-- row.// -->
 
 </div><!-- container // -->
 </section>
 <!-- ========================= SECTION  END// ========================= -->
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Carousel functionality
+        const slides = document.querySelector('.banner-carousel-slides');
+        const slideItems = document.querySelectorAll('.banner-slide');
+        const dotsContainer = document.querySelector('.banner-carousel-dots');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
 
+        let currentIndex = 0;
+        const totalSlides = slideItems.length;
+        let slideInterval;
 
-</body>
-</html>
+        // Create dots for navigation
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.classList.add('banner-dot');
+            if (i === 0) dot.classList.add('active');
 
+            dot.addEventListener('click', () => {
+                goToSlide(i);
+            });
+
+            dotsContainer.appendChild(dot);
+        }
+
+        const dots = document.querySelectorAll('.banner-dot');
+
+        // Function to go to a specific slide
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlidePosition();
+            updateDots();
+            resetInterval();
+        }
+
+        // Update slide position
+        function updateSlidePosition() {
+            slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        // Update active dot
+        function updateDots() {
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        // Next slide
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlidePosition();
+            updateDots();
+        }
+
+        // Previous slide
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlidePosition();
+            updateDots();
+        }
+
+        // Reset auto-slide interval
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 3000); // Change slide every 2 seconds
+        }
+
+        // Event listeners for navigation buttons
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetInterval();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetInterval();
+        });
+
+        // Start auto-slide
+        resetInterval();
+
+        // Pause auto-slide on hover
+        slides.parentElement.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        slides.parentElement.addEventListener('mouseleave', resetInterval);
+    });
+</script>
 
 {% endblock %}
